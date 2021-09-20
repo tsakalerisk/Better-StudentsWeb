@@ -1,6 +1,4 @@
 body {
-	--extensionId: "ejhefblfdcglaogdbkoekeehkingblfg";
-
 	background-color: #232C3A !important;
 }
 
@@ -114,7 +112,6 @@ tr.subHeaderBack > td {
 #TBodyTitle > td:nth-child(1) > img {
 	margin-top: 50;
 	position: static;
-	content: url('chrome-extension://ejhefblfdcglaogdbkoekeehkingblfg/images/uom_logo.png');
 	image-rendering: -webkit-optimize-contrast;
 	width: 250px;
 }

@@ -111,4 +111,5 @@ if (classesFailed.length != 0) {
     main_table_body.insertBefore(classesFailedElement, main_table_body.children[positionAboveTable]);
 }
 
-var logoElement = document.querySelector("#TBodyTitle > td:nth-child(1) > img")[0];
+var logoElement = document.querySelector("#TBodyTitle > td:nth-child(1) > img");
+logoElement.src = chrome.runtime.getURL('/images/uom_logo.png');
