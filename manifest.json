@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+ 
+  "name": "Better StudentsWeb",
+  "version": "1.0.0",
+  "description": "",
+  "web_accessible_resources": ["/images/uom_logo.png"],
+ 
+  "content_scripts": [{
+    "css": ["styles.css"],
+		"js": ["script.js"],
+    "matches": ["https://services.uom.gr/unistudent/stud_CResults.asp*"]
+  }]
+ 
+}

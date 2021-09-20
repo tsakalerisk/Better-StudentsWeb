@@ -1,0 +1,201 @@
+body {
+	--extensionId: "ejhefblfdcglaogdbkoekeehkingblfg";
+
+	background-color: #232C3A !important;
+}
+
+body > table {
+	margin: 0 auto;
+    width: max-content;
+	border-collapse: inherit;
+}
+
+#MainTableDataRow > td > table {
+	border-width: 1px !important;
+    border-color: black;
+    border-style: solid;
+    border-radius: 5pt;
+    overflow: hidden;
+	border-collapse: initial;
+    /* width: 75%; */
+}
+
+td.groupHeader {
+	font-family: Arial, sans-serif;
+    font-size: 10pt;
+	height: 35;
+	background-color: #232C3A;
+	color: white;
+}
+
+tr.italicHeader > td {
+	font-family: Arial, sans-serif;
+    font-size: 9pt;
+}
+
+td.topBorderLight {
+	font-family: Arial, sans-serif;
+    font-size: 9pt;
+	background-color: white;
+	border-color: transparent;
+	padding: 10pt;
+}
+
+tr.subHeaderBack > td {
+	font-family: Arial, sans-serif;
+    font-size: 9pt;
+	background-color: AliceBlue;
+}
+
+.redFonts {
+	font-family: Arial, sans-serif !important;
+    font-size: 10pt !important;
+	background-color: white !important;
+	color: navy !important;
+	font-weight:bold !important;
+}
+
+.error {
+	font-family: Arial, sans-serif !important;
+    font-size: 10pt !important;
+	color: navy !important;
+	font-weight:bold !important;
+}
+
+#MainTableDataRow > td > table > tbody > tr:not(.subHeaderBack) > td:nth-child(1):not(.groupHeader) {
+	display: none;
+}
+
+.MainHeader, .rightColumn, .tableheader, .subHeaderBack, .subHeaderBack, .leftColumn {
+	background-color: transparent !important;
+}
+
+.menuItem, #TBodyInv2 > td:nth-child(2) {
+	background-image: none !important;
+}
+
+#TBodyTitle > td:nth-child(1) > div {
+	width: auto !important;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 20px;
+}
+
+/*Menu Table*/
+.menuTable {
+	width: 100% !important;
+	border: none;
+	border-radius: 5pt;
+	overflow: hidden;
+}
+
+.menuItem {
+	font-family: Arial, sans-serif !important;
+    font-size: 9pt !important;
+	color: black !important;
+	text-decoration: none !important;
+	padding: 5pt;
+}
+
+#menuTable > tbody > tr:nth-child(9) {
+	display: none;
+}
+
+.menuItem:hover {
+  background-color: #428bca;
+  color: white !important;
+  border-radius: 2pt;
+}
+
+.rightColumn, .leftcolumn, .subHeaderBack, #TBodyDesc > td.subheader > table {
+	border-color: transparent !important;
+}
+
+#TBodyTitle > td:nth-child(1) > img {
+	margin-top: 50;
+	position: static;
+	content: url('chrome-extension://ejhefblfdcglaogdbkoekeehkingblfg/images/uom_logo.png');
+	image-rendering: -webkit-optimize-contrast;
+	width: 250px;
+}
+
+/* top */
+#TBodyTitle > td:nth-child(4) > span {
+	width: -webkit-fill-available;
+    float: right;
+	
+	margin-top: 50;
+	border-top: 1px solid;
+	border-left: 1px solid;
+	border-right: 1px solid;
+	border-radius: 5pt 5pt 0 0;
+	
+	background-color: white !important;
+	
+	padding: 20pt;
+}
+
+/* middle */
+#TBodyInv1 > td, #TBodyInv2 > td:nth-child(2), #TBodyDesc > td.subheader, #main {
+	border-left: 1px solid;
+	border-right: 1px solid;
+	
+	background-color: white !important;
+}
+
+#TBodyName > td:nth-child(2) {
+	border-left: 1px solid;
+	border-right: 1px solid;
+	
+	background-color: #428bca !important;
+	padding: 20 20 0 20;
+}
+
+#header, #subheader {
+	color: white;
+	font-family: Arial, sans-serif;
+}
+
+#TBodyDesc > td.subheader {
+	background-color: #428bca !important;
+	padding: 0 20 20 20;
+}
+
+#TBodyName > td:nth-child(2) > table > tbody > tr > td.subheader, #pagedesc {
+	color: white;
+	font-family: Arial, sans-serif;
+}
+
+/* bottom */
+#TBodyFooter > td:nth-child(1) {
+	margin-bottom: 50;
+	border-bottom: 1px solid;
+	border-left: 1px solid;
+	border-right: 1px solid;
+	
+	background-color: white;
+}
+
+#TBodyInv1, #TBodyInv2 {
+	display: none;
+}
+
+#TBodyTitle > td.mainHeader:nth-child(5) > div {
+	display: none;
+}
+
+#MainTableDropDownRow > td:nth-child(2) {
+	display: none;
+} 
+
+#TBodyTitle > td:nth-child(1) {
+	padding-right: 10pt;
+}
+
+#TBodyName > td:nth-child(3) {
+	display: none;
+}
+
+#TBodyDesc > td.leftcolumn {
+	visibility: hidden;
+}
