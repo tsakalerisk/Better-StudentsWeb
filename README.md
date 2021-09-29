@@ -13,6 +13,6 @@
 
 
 ### Με την επέκταση:
-![](https://i.imgur.com/U2h3j1x.png)
+![](https://i.imgur.com/6HIZ8EQ.png)
 ### Χωρίς την επέκταση:
 ![](https://i.imgur.com/r882h9N.png)

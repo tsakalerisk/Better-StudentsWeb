@@ -119,6 +119,7 @@ tr.subHeaderBack>td {
 }
 
 .menuItem>div:nth-child(1):hover {
+	transition: all 120ms linear;
 	background-color: var(--openeclass-blue);
 	color: white !important;
 	border-radius: 2pt;
@@ -235,6 +236,7 @@ tr.subHeaderBack>td {
 }
 
 .menuItem>div:nth-child(2)>table>tbody>tr>td:nth-child(2):hover {
+	transition: all 120ms linear;
 	background-color: var(--openeclass-blue);
 	color: white;
 	border-radius: 2pt;

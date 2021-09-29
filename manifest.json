@@ -1,15 +1,28 @@
 {
   "manifest_version": 2,
- 
   "name": "Better StudentsWeb",
   "version": "1.0.0",
   "description": "",
-  "web_accessible_resources": ["/images/uom_logo.png"],
- 
-  "content_scripts": [{
-    "css": ["styles.css"],
-		"js": ["script.js"],
-    "matches": ["https://services.uom.gr/unistudent/stud_CResults.asp*"]
-  }]
- 
+  "web_accessible_resources": [
+    "/images/uom_logo.png"
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "styles.css"
+      ],
+      "js": [
+        "chart.min.js",
+        "script.js"
+      ],
+      "matches": [
+        "https://services.uom.gr/unistudent/stud_CResults.asp*"
+      ]
+    }
+  ]
 }

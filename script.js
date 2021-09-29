@@ -1,4 +1,4 @@
-var head, tbody, main_table_body, main_table_data_body, logoElement
+var head, tbody, main_table_body, main_table_data_body, logoElement, newDataRow
 
 function reformatDocument() {
     //Link Bootstrap
@@ -9,6 +9,10 @@ function reformatDocument() {
     link.crossOrigin = "anonymous";
     link.integrity = "sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU";
     head.insertBefore(link, head.children[0]);
+
+    var chartScript = document.createElement('script');
+    chartScript.src = "https://cdn.jsdelivr.net/npm/chart.js";
+    head.appendChild(chartScript);
 
     //Refromat ids and classes
     tbody = document.querySelector("body > table > tbody");
@@ -83,30 +87,33 @@ function reformatDocument() {
     //Set logo image
     logoElement = document.querySelector("#TBodyTitle > td:nth-child(1) > img");
     logoElement.src = chrome.runtime.getURL('/images/uom_logo.png');
+
+    newDataRow = document.createElement("tr");
+    main_table_body.insertBefore(newDataRow, main_table_body.children[0]);
 }
 
 function calculateLatestGrades() {
-    var classesPassedElement = document.createElement("tr");
+    var classesPassedElement = document.createElement("div");
+    classesPassedElement.setAttribute("class", "alert alert-success");
+    classesPassedElement.setAttribute("role", "alert");
     classesPassedElement.innerHTML = `
-<div class="alert alert-success" role="alert">
-    <h4 class="alert-heading" style='font-size: 1.2rem; font-family: apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";'>
-        Μαθήματα που περάσατε
-    </h4>
-    <hr>
-    <ul class="mb-0" style='font-size: .9rem; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";'>
-    </ul>
-</div>`;
+        <h4 class="alert-heading" style='font-size: 1.2rem; font-family: apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";'>
+            Μαθήματα που περάσατε
+        </h4>
+        <hr>
+        <ul class="mb-0" style='font-size: .9rem; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";'>
+        </ul>`;
 
-    var classesFailedElement = document.createElement("tr");
+    var classesFailedElement = document.createElement("div");
+    classesFailedElement.setAttribute("class", "alert alert-danger");
+    classesFailedElement.setAttribute("role", "alert");
     classesFailedElement.innerHTML = `
-<div class="alert alert-danger" role="alert">
-    <h4 class="alert-heading" style='font-size: 1.2rem; font-family: apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";'>
-        Μαθήματα που δεν περάσατε
-    </h4>
-    <hr>
-    <ul class="mb-0" style='font-size: .9rem; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";'>
-    </ul>
-</div>`;
+        <h4 class="alert-heading" style='font-size: 1.2rem; font-family: apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";'>
+            Μαθήματα που δεν περάσατε
+        </h4>
+        <hr>
+        <ul class="mb-0" style='font-size: .9rem; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";'>
+        </ul>`;
 
     const d = new Date();
     var currentExamPeriod;
@@ -135,39 +142,50 @@ function calculateLatestGrades() {
     const classesFailed = [];
     for (subject of document.getElementsByClassName("Subject")) {
         var grade = parseInt(subject.children[6].children[0].textContent);
-        //Trim whitespaces from the start of subjectName and remove text in parentheses
-        var subjectName = subject.children[1].textContent.trimStart().replace(/ *\([^)]*\) */g, "");
+        //Remove text in parentheses and trim whitespaces from the edges
+        var subjectName = subject.children[1].textContent.replace(/ *\([^)]*\) */g, "").trim();
         //Remove all whitespaces from examPeriod for easy comparing of values
         var examPeriod = subject.children[7].textContent.replace(/\s+/g, '');
-        if (!isNaN(grade) && examPeriod == currentExamPeriod) {
+        if (!isNaN(grade)) {
             if (grade >= 5) {
-                classesPassed.push(new Subject(subjectName, grade));
+                if (examPeriod == currentExamPeriod) {
+                    classesPassed.push(new Subject(subjectName, grade));
+                }
+                numPassed++;
             }
             else {
-                classesFailed.push(new Subject(subjectName, grade));
+                if (examPeriod == currentExamPeriod) {
+                    classesFailed.push(new Subject(subjectName, grade));
+                }
+                numFailed++;
+            }
+        }
+        else {
+            if (subject.children[6].style.textDecoration != "line-through") {
+                numNotGraded++;
             }
         }
     }
 
+    var parent = document.createElement("td");
+    parent.style.width = "50%";
+    newDataRow.appendChild(parent);
+
     for (subject of classesPassed) {
         var subjectElement = document.createElement("li");
         subjectElement.innerHTML = subject.name + " <b>" + subject.grade + "</b>";
-        classesPassedElement.children[0].children[2].appendChild(subjectElement);
+        classesPassedElement.children[2].appendChild(subjectElement);
     }
-    var positionAboveTable = 0;
-    if (classesPassed.length != 0) {
-        main_table_body.insertBefore(classesPassedElement, main_table_body.children[positionAboveTable]);
-        positionAboveTable++;
-    }
+    parent.appendChild(classesPassedElement);
 
     for (subject of classesFailed) {
         var subjectElement = document.createElement("li");
         subjectElement.innerHTML = subject.name + " <b>" + subject.grade + "</b>";
-        classesFailedElement.children[0].children[2].appendChild(subjectElement);
+        classesFailedElement.children[2].appendChild(subjectElement);
     }
-    if (classesFailed.length != 0) {
-        main_table_body.insertBefore(classesFailedElement, main_table_body.children[positionAboveTable]);
-    }
+    //if (classesFailed.length != 0) {
+    parent.appendChild(classesFailedElement);
+    //}
 }
 
 function newMnuOnClick(id, link) {
@@ -205,5 +223,54 @@ function newMnuOnClick(id, link) {
     }
 }
 
+var numPassed = 0, numFailed = 0, numNotGraded = 0;
 reformatDocument();
 calculateLatestGrades();
+var doughnutParent = document.createElement("td");
+doughnutParent.innerHTML = `
+    <div style="margin-left: 10px; padding: 8px;">
+        <div style="width:100%; height: 250px">
+            <canvas id="subjectChart">
+            </canvas>
+        </div>
+    </div>`;
+doughnutParent.style.width = "50%";
+newDataRow.appendChild(doughnutParent);
+
+const data = {
+    labels: [
+        'Περασμένα Μαθήματα',
+        'Μαθήματα χωρίς βαθμό',
+        'Κομμένα μαθήματα'
+    ],
+    datasets: [{
+        label: 'My First Dataset',
+        data: [numPassed, numNotGraded, numFailed],
+        backgroundColor: [
+            '#d4edda',
+            '#fff3cd',
+            '#f8d7da'
+        ],
+        hoverOffset: 4
+    }]
+};
+
+const config = {
+    type: 'doughnut',
+    data: data,
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }
+};
+
+var subjectChart = new Chart(
+    document.getElementById('subjectChart'),
+    config
+);
+
