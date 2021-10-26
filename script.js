@@ -173,14 +173,14 @@ function calculateLatestGrades() {
 
     for (subject of classesPassed) {
         var subjectElement = document.createElement("li");
-        subjectElement.innerHTML = subject.name + " <b>" + subject.grade + "</b>";
+        subjectElement.innerHTML = subject.name + "&nbsp;<b>" + subject.grade + "</b>";
         classesPassedElement.children[2].appendChild(subjectElement);
     }
     parent.appendChild(classesPassedElement);
 
     for (subject of classesFailed) {
         var subjectElement = document.createElement("li");
-        subjectElement.innerHTML = subject.name + " <b>" + subject.grade + "</b>";
+        subjectElement.innerHTML = subject.name + "&nbsp;<b>" + subject.grade + "</b>";
         classesFailedElement.children[2].appendChild(subjectElement);
     }
     //if (classesFailed.length != 0) {

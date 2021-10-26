@@ -7,9 +7,8 @@ body {
 }
 
 body>table {
-	margin: 0 auto;
-	width: max-content;
-	border-collapse: inherit;
+	margin: 0px auto;
+	max-width: 1200px;
 }
 
 #MainTableDataRow>td>table {
@@ -19,7 +18,6 @@ body>table {
 	border-radius: 5pt;
 	overflow: hidden;
 	border-collapse: initial;
-	/* width: 75%; */
 }
 
 td.groupHeader {
@@ -87,7 +85,7 @@ tr.subHeaderBack>td {
 
 .menuTable {
 	width: 100% !important;
-	border: none;
+	border: none !important;
 	border-radius: 5pt;
 	overflow: hidden;
 	background-color: var(--openeclass-darkblue) !important;
