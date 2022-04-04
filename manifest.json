@@ -1,11 +1,12 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Better StudentsWeb",
   "version": "1.0.0",
   "description": "",
-  "web_accessible_resources": [
-    "/images/uom_logo.png"
-  ],
+  "web_accessible_resources": [{
+    "resources": ["/images/*.png"],
+    "matches": ["https://services.uom.gr/*"]
+    }],
   "icons": {
     "16": "images/icon16.png",
     "48": "images/icon48.png",
