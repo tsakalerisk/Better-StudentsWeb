@@ -141,7 +141,7 @@ function calculateLatestGrades() {
     const classesPassed = [];
     const classesFailed = [];
     for (subject of document.getElementsByClassName("Subject")) {
-        var grade = parseInt(subject.children[6].children[0].textContent);
+        var grade = parseFloat(subject.children[6].children[0].textContent.replace(/(\d+),(\d+)/g, "$1.$2"));
         //Remove text in parentheses and trim whitespaces from the edges
         var subjectName = subject.children[1].textContent.replace(/ *\([^)]*\) */g, "").trim();
         //Remove all whitespaces from examPeriod for easy comparing of values
