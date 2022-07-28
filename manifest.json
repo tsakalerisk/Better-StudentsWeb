@@ -3,10 +3,17 @@
   "name": "Better StudentsWeb",
   "version": "1.0.0",
   "description": "",
-  "web_accessible_resources": [{
-    "resources": ["/images/*.png"],
-    "matches": ["https://services.uom.gr/*"]
-    }],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "/images/*.png"
+      ],
+      "matches": [
+        "https://services.uom.gr/*",
+        "file://*"
+      ]
+    }
+  ],
   "icons": {
     "16": "images/icon16.png",
     "48": "images/icon48.png",
@@ -22,7 +29,8 @@
         "script.js"
       ],
       "matches": [
-        "https://services.uom.gr/unistudent/stud_CResults.asp*"
+        "https://services.uom.gr/unistudent/stud_CResults.asp*",
+        "file:///*/UNIVERSITY%20STUDENTS%20SYSTEM.html"
       ]
     }
   ]
